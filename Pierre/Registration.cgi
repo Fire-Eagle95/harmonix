@@ -23,8 +23,8 @@ my $boolean = 0;
 while(my $row = <$fh>)
 {
 	chomp $row;
-	my @elements = split(/,/, $row);
-	if ($elements[0] eq  $name)
+	($a, $b, $c) = split(/ /, $row);
+	if ($b eq  $username)
 	{
 		$boolean = 1;
 	}
@@ -53,7 +53,7 @@ print '<a href="http://cgi.cs.mcgill.ca/~pgianf/Welcome.html">Go back to Home pa
 print '</body>';
 print '</html>';
 open(my $fh, '>>', $filename);
-print $fh "$name, $username, $psswd\n";
+print $fh "$name $username $psswd\n";
 close $fh;
 }
 exit 0;
