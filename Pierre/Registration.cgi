@@ -38,7 +38,7 @@ print '<title>Registration failed</title>';
 print '</head>';
 print '<body bgcolor="A9F5F2" text="#08088A"><h2>We are sorry but a member already has this name</h2>';
 print '<a href="http://cgi.cs.mcgill.ca/~pgianf/become_member.html">Try to register again</a><br/><br/>';
-print '<a href="http://cgi.cs.mcgill.ca/~pgianf/Welcome.html">Go back to Home page</a>';
+print '<a href="http://cgi.cs.mcgill.ca/~pgianf/welcome.html">Go back to Home page</a>';
 }
 else {
 print '<html>';
@@ -49,7 +49,7 @@ print '<body bgcolor="A9F5F2" text="#08088A"><h2>Your registration was successfu
 print "Your name is $name<br/>";
 print "Your username is $username<br/>";
 print "Your password is $psswd<br/><br/>";
-print '<a href="http://cgi.cs.mcgill.ca/~pgianf/Welcome.html">Go back to Home page</a>';
+print '<a href="http://cgi.cs.mcgill.ca/~pgianf/welcome.html">Go back to Home page</a>';
 print '</body>';
 print '</html>';
 open(my $fh, '>>', $filename);
