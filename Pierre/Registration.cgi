@@ -20,6 +20,18 @@
 my $filename = 'members.csv';
 open(my $fh, '<:encoding(UTF-8)', $filename);
 my $boolean = 0;
+my $space = ' ';
+if(index($name,$space) != -1) 
+{
+	$boolean = 1;
+}
+elsif(index($username,$space) != -1) 
+{
+	$boolean = 1;
+} 
+elsif(index($psswd,$space) != -1) {
+	$boolean = 1;
+}
 while(my $row = <$fh>)
 {
 	chomp $row;
@@ -36,7 +48,7 @@ print '<html>';
 print '<head>';
 print '<title>Registration failed</title>';
 print '</head>';
-print '<body bgcolor="A9F5F2" text="#08088A"><h2>We are sorry but a member already has this name</h2>';
+print '<body bgcolor="A9F5F2" text="#08088A"><h2>We are sorry but a member already has this username or you tried to  input a space</h2>';
 print '<a href="http://cgi.cs.mcgill.ca/~pgianf/become_member.html">Try to register again</a><br/><br/>';
 print '<a href="http://cgi.cs.mcgill.ca/~pgianf/welcome.html">Go back to Home page</a>';
 }
