@@ -1,50 +1,50 @@
 #!/usr/bin/perl
 
 	local ($buffer, @pairs, $pair, $name, $value, %FORM);
-	$ENV{'REQUEST_METHOD'} =~ tr/a-z/A-Z/;
-	if ($ENV{'REQUEST_METHOD'} eq "GET")
+	$ENV{'REQUEST_METHOD'} =~ tr/a-z/A-Z/; #this is the buffer to get information from get
+	if ($ENV{'REQUEST_METHOD'} eq "GET") 
 	{
 		$buffer = $ENV{'QUERY_STRING'};
 	}
-	@pairs = split(/&/, $buffer);
-	foreach $pair (@pairs)
+	@pairs = split(/&/, $buffer); #the ampersand will represent a split (from the query string on top)
+	foreach $pair (@pairs) #for each pair of variables, the "=" will represent another split and we'll extract the variables from the query string
 	{
 		($name, $value) = split(/=/, $pair);
 		$value =~ tr/+/ /;
 		$value =~ s/%(..)/pack("C", hex($1))/eg;
 		$FORM{$name} = $value;
 	}
-	my $name = $FORM{name};
-	my $username = $FORM{username};
-	my $psswd = $FORM{psswd};
-my $filename = 'members.csv';
+	my $name = $FORM{name}; #referencing the variables -> name
+	my $username = $FORM{username}; #referencing username
+	my $psswd = $FORM{psswd}; #referencing password
+my $filename = 'members.csv'; #filename that will be written is members.csv
 open(my $fh, '<:encoding(UTF-8)', $filename);
 my $boolean = 0;
 my $space = ' ';
-if(index($name,$space) != -1) 
+if(index($name,$space) != -1) #if there is a space in the name, error
 {
 	$boolean = 1;
 }
-elsif(index($username,$space) != -1) 
+elsif(index($username,$space) != -1) #if there is a space in the username, error
 {
 	$boolean = 1;
 } 
-elsif(index($psswd,$space) != -1) {
+elsif(index($psswd,$space) != -1) { #if there is a space in password, error
 	$boolean = 1;
 }
-while(my $row = <$fh>)
+while(my $row = <$fh>) #for each row of the file
 {
-	chomp $row;
+	chomp $row; #get the row and split by space
 	($a, $b, $c) = split(/ /, $row);
-	if ($b eq  $username)
+	if ($b eq  $username) #if the username that is being input already exists, error
 	{
 		$boolean = 1;
 	}
 }
-close $fh;
-print "Content-type:text/html\r\n\r\n";
-if($boolean == 1){
-print '<html>';
+close $fh; #close file
+print "Content-type:text/html\r\n\r\n"; #printing the webpages
+if($boolean == 1){ #in case of an error, print a registration error
+print '<html>'; #html 
 print '<head>';
 print '<title>Registration failed</title>';
 print '</head>';
